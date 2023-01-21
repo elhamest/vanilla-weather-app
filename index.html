@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌤 Weather Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="cover">
+        <div class="container">
+            <!---- top section ----->
+            <div class="top-section">
+                <div class="col1">
+                    <!--state1-->
+                    <div class="city-heading">
+                        <button class="showing-search-form-button" id="showing-search-form-button"></button>
+                        <h1 class="city-heading-name" id="city-heading-name"></h1>
+                    </div>
+                    <!--state2-->
+                    <form class="search-form">
+                        <input type="search" placeholder="Search..." class="search-input" id="search-input" autocomplete="off" />
+                        <button type="submit" class="current-location-button" id="current-location-button">
+                <img
+                  class="current-location-button-image"
+                  id="current-location-button-image"
+                />
+              </button>
+                    </form>
+
+                    <h3 class="current-date" id="current-date"></h3>
+                    <h2 class="current-day" id="current-day"></h2>
+                    <div class="current-min-max-table">
+                        <table>
+                            <tr>
+                                <td rowspan="2">
+                                    <span class="current-tempreture degree-value-to-change" id="current-tempreture"></span>
+                                </td>
+                                <td>
+                                    <span class="current-tempreture-symbol unit-degree-to-change" id="current-tempreture-symbol">&#8451;</span
+                    >
+                  </td>
+                  <td
+                    class="current-max degree-value-to-change"
+                    id="current-max"
+                  ></td>
+                  <td>&nbsp &nbsp</td>
+                  <td class="celsius-degree degree-style">
+                    <a
+                      href="#"
+                      class="celsius-degree-link degree-link"
+                      id="celsius-degree-link"
+                      >&#8451;</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    class="current-min degree-value-to-change"
+                    id="current-min"
+                  ></td>
+                  <td>&nbsp &nbsp</td>
+                  <td class="fahrenheit-degree degree-style">
+                    <a
+                      href="#"
+                      class="fahrenheit-degree-link degree-link"
+                      id="fahrenheit-degree-link"
+                      >&#8457;</a
+                    >
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="col2">
+            <div class="current-weather-image">
+              <img alt="Weather" />
+            </div>
+            <div calss="current-weather-text">
+              <div
+                class="current-weather-state"
+                id="current-weather-state"
+              ></div>
+              <div class="current-feels-like">
+                Feels like
+                <span
+                  class="degree-value-to-change"
+                  id="current-feels-like-value"
+                ></span>
+                                    <span class="unit-degree-to-change" id="current-feels-like-unit">&#8451;</span
+                >
+              </div>
+              <div class="current-humidity">
+                Humidity: <span id="current-humidity-value"></span> %
+                    </div>
+                    <div class="current-wind">
+                        Wind <span id="current-wind-value"></span> km/h
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------ card-section ------->
+        <div class="card-section">
+            <div class="card">
+                <span class="card-title">SUN</span>
+                <br />
+                <img src="img/wt1.png" alt="" class="card-image" style="max-width: 50px" />
+                <br />
+                <p class="daily-weather-state">Mostly Cloudy</p>
+                <span class="daily-min-tempreture degree-value-to-change">15</span>
+                <span class="slash"> / </span>
+                <span class="daily-max-tempreture degree-value-to-change">6 </span>
+                <span class="degree-style unit-degree-to-change">&#8451;</span>
+            </div>
+
+            <div class="card card-test">
+                <span class="card-title">MON</span>
+                <br />
+                <img src="img/wt1.png" alt="" class="card-image" style="max-width: 50px" />
+                <br />
+                <p class="daily-weather-state">Mostly Cloudy</p>
+                <span class="daily-min-tempreture degree-value-to-change">15</span>
+                <span class="slash"> / </span>
+                <span class="daily-max-tempreture degree-value-to-change">6 </span>
+                <span class="degree-style unit-degree-to-change">&#8451;</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">TUE</span>
+                <br />
+                <img src="img/wt1.png" alt="" class="card-image" style="max-width: 50px" />
+                <br />
+                <p class="daily-weather-state">Mostly Cloudy</p>
+                <span class="daily-min-tempreture degree-value-to-change">15</span>
+                <span class="slash"> / </span>
+                <span class="daily-max-tempreture degree-value-to-change">6 </span>
+                <span class="degree-style unit-degree-to-change">&#8451;</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">WED</span>
+                <br />
+                <img src="img/wt1.png" alt="" class="card-image" style="max-width: 50px" />
+                <br />
+                <p class="daily-weather-state">Mostly Cloudy</p>
+                <span class="daily-min-tempreture degree-value-to-change">15</span>
+                <span class="slash"> / </span>
+                <span class="daily-max-tempreture degree-value-to-change">6 </span>
+                <span class="degree-style unit-degree-to-change">&#8451;</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">THU</span>
+                <br />
+                <img src="img/wt1.png" alt="" class="card-image" style="max-width: 50px" />
+                <br />
+                <p class="daily-weather-state">Mostly Cloudy</p>
+                <span class="daily-min-tempreture degree-value-to-change">15</span>
+                <span class="slash"> / </span>
+                <span class="daily-max-tempreture degree-value-to-change">6 </span>
+                <span class="degree-style unit-degree-to-change">&#8451;</span>
+            </div>
+        </div>
+        <footer>
+            <p>
+                This page was built by
+                <a href="https://www.linkedin.com/in/elham-estedlali-850a606b/" target="_blank">
+              Elham Estedlali</a
+            >
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
