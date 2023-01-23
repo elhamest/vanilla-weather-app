@@ -1,5 +1,18 @@
 //ُ==========::::: current date and time :::::==========
-function getCurrentDay(currentDate) {
+function GetDateTime(timeStamp) {
+    let date = new Date(timeStamp);
+    let objDateTime = {};
+
+    let hour = date.getHours();
+    if (hour < 10) {
+        hour = `0${hour}`;
+    }
+    let Minute = date.getMinutes();
+    if (Minute < 10) {
+        Minute = `0${Minute}`;
+    }
+    objDateTime.time = hour + ":" + Minute;
+    //
     let arrDay = [
         "Sunday",
         "Monday",
@@ -9,24 +22,9 @@ function getCurrentDay(currentDate) {
         "Friday",
         "Saturday",
     ];
-    let currentDayNoOfWeek = currentDate.getDay();
-    return arrDay[currentDayNoOfWeek];
-}
-//
-function getCurrentTime(currentDate) {
-    let currenthour = currentDate.getHours();
-    if (currenthour < 10) {
-        currenthour = `0${currenthour}`;
-    }
-    let currentMinute = currentDate.getMinutes();
-    if (currentMinute < 10) {
-        currentMinute = `0${currentMinute}`;
-    }
-    let currentTime = currenthour + ":" + currentMinute;
-    return currentTime;
-}
-//
-function getCurrentMonthAndDayNoAndTime(currentDate) {
+    let DayNoOfWeek = date.getDay();
+    objDateTime.day = arrDay[DayNoOfWeek];
+    //
     let arrMonth = [
         "January",
         "February",
@@ -41,11 +39,10 @@ function getCurrentMonthAndDayNoAndTime(currentDate) {
         "November",
         "December",
     ];
-    let currentMonthNo = currentDate.getMonth();
-    let currentDateOfMonth = currentDate.getDate();
-    let currentMonthAndDayNo = `${arrMonth[currentMonthNo]} ${currentDateOfMonth}`;
-    let currentTime = ` (${getCurrentTime(currentDate)})`;
-    return currentMonthAndDayNo + currentTime;
+    let MonthNo = date.getMonth();
+    let DateOfMonth = date.getDate();
+    objDateTime.month = `, ${arrMonth[MonthNo]} ${DateOfMonth}`;
+    return objDateTime;
 }
 
 //ُ==========::::: search form :::::==========
@@ -92,28 +89,41 @@ function addEscapeToEventListener(event) {
 function readAPIAndSetElements(response) {
     //let country = response.data.sys.country;
     //let cityName = response.data.name;
-    let WeatherStateMain = response.data.weather.main;
     let WeatherStateDescription = response.data.weather[0].description;
-    let temp = Math.round(response.data.main.temp);
-    let temp_max = Math.round(response.data.main.temp_max);
-    let temp_min = Math.round(response.data.main.temp_min);
-    let feels_like = Math.round(response.data.main.feels_like);
-    let humidity = response.data.main.humidity;
-    let windSpeed = Math.round(response.data.wind.speed);
     let finalWeatherStateDescription = "";
     if (typeof WeatherStateDescription === "undefined") {
-        finalWeatherStateDescription = WeatherStateMain;
+        finalWeatherStateDescription = response.data.weather.main;
     } else {
         finalWeatherStateDescription = WeatherStateDescription;
     }
-    document.querySelector("#current-tempreture").innerHTML = temp;
-    document.querySelector("#current-max").innerHTML = temp_max;
-    document.querySelector("#current-min").innerHTML = temp_min;
+
+    document.querySelector("#current-tempreture").innerHTML = Math.round(
+        response.data.main.temp
+    );
+    document.querySelector("#current-max").innerHTML = Math.round(
+        response.data.main.temp_max
+    );
+    document.querySelector("#current-min").innerHTML = Math.round(
+        response.data.main.temp_min
+    );
     document.querySelector("#current-weather-description").innerHTML =
         finalWeatherStateDescription;
-    document.querySelector("#current-feels-like-value").innerHTML = feels_like;
-    document.querySelector("#current-humidity-value").innerHTML = humidity;
-    document.querySelector("#current-wind-value").innerHTML = windSpeed;
+    document.querySelector("#current-feels-like-value").innerHTML = Math.round(
+        response.data.main.feels_like
+    );
+    document.querySelector("#current-humidity-value").innerHTML =
+        response.data.main.humidity;
+    document.querySelector("#current-wind-value").innerHTML = Math.round(
+        response.data.wind.speed
+    );
+
+    let timeStamp = response.data.dt * 1000;
+
+    let objDateTime = GetDateTime(timeStamp);
+    document.querySelector("#last-updated-time-value").innerHTML =
+        objDateTime.time;
+    document.querySelector("#last-updated-day").innerHTML = objDateTime.day;
+    document.querySelector("#last-updated-month").innerHTML = objDateTime.month;
 }
 //
 function handleCurrentWeatherApiByCityName(response) {
@@ -143,8 +153,10 @@ function callWeatherApiByCityname(cityName) {
         .get(apiUrl)
         .then(handleCurrentWeatherApiByCityName)
         .catch((t) => {
-            if (t.response.data !== undefined) {
+            if (t.response !== undefined && t.response.data !== undefined) {
                 alert(t.response.data.message);
+            } else if (t.message != null) {
+                alert(t.message);
             } else {
                 alert("something went wrong!");
             }
@@ -276,38 +288,36 @@ function showDegreeInFahrenheit(event) {
 
 //==========::::: load Page :::::==========
 
-/*----- set time and date ------*/
-let now = new Date();
-let currentDateElement = document.querySelector("#current-date");
-currentDateElement.innerHTML = getCurrentMonthAndDayNoAndTime(now);
-
-document.querySelector("#current-day").innerHTML = getCurrentDay(now);
-
 /*----- search form ------*/
-let showSearchformElement = document.querySelector(
-    "#showing-search-form-button"
-);
-showSearchformElement.addEventListener("click", showSearchForm);
+function onLoad() {
+    let showSearchformElement = document.querySelector(
+        "#showing-search-form-button"
+    );
+    showSearchformElement.addEventListener("click", showSearchForm);
 
-let SearchInputElement = document.querySelector("#search-input");
-SearchInputElement.addEventListener("keypress", handleSearchInputElement);
+    let SearchInputElement = document.querySelector("#search-input");
+    SearchInputElement.addEventListener("keypress", handleSearchInputElement);
 
-document.addEventListener("keyup", addEscapeToEventListener);
+    document.addEventListener("keyup", addEscapeToEventListener);
 
-/*----- current location button ----- */
-let currentLocationButtonImageElement = document.querySelector(
-    "#current-location-button-image"
-);
-currentLocationButtonImageElement.addEventListener(
-    "click",
-    handleCurrentLocationButtonImage
-);
+    /*----- current location button ----- */
+    let currentLocationButtonImageElement = document.querySelector(
+        "#current-location-button-image"
+    );
+    currentLocationButtonImageElement.addEventListener(
+        "click",
+        handleCurrentLocationButtonImage
+    );
 
-/*----- change degree -----*/
-let celsiusDegreeLink = document.querySelector("#celsius-degree-link");
-celsiusDegreeLink.addEventListener("click", showDegreeInCelsius);
+    /*----- change degree -----*/
+    let celsiusDegreeLink = document.querySelector("#celsius-degree-link");
+    celsiusDegreeLink.addEventListener("click", showDegreeInCelsius);
 
-let fahrenheitDegreeLink = document.querySelector("#fahrenheit-degree-link");
-fahrenheitDegreeLink.addEventListener("click", showDegreeInFahrenheit);
+    let fahrenheitDegreeLink = document.querySelector("#fahrenheit-degree-link");
+    fahrenheitDegreeLink.addEventListener("click", showDegreeInFahrenheit);
 
-callWeatherApiByCityname("London");
+    /*----------*/
+    callWeatherApiByCityname("London");
+}
+
+window.onload = onLoad();

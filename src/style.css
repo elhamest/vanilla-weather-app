@@ -70,18 +70,26 @@ body {
     margin: 0 auto;
 }
 
-.current-date {
+.last-updated-time {
     color: #1771cc;
     font-size: 12px;
     font-weight: 500;
     margin: 0 0 0 20px;
 }
 
-.current-day {
+.last-updated-date {
     color: #1771cc;
+    margin: 0 0 0 20px;
+}
+
+.last-updated-day {
     font-size: 22px;
     font-weight: 500;
-    margin: 0 0 0 20px;
+}
+
+.last-updated-month {
+    font-size: 13px;
+    font-weight: 400;
 }
 
 .current-min-max-table {
