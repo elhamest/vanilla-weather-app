@@ -92,7 +92,7 @@ function addEscapeToEventListener(event) {
 function readAPIAndSetElements(response) {
     //let country = response.data.sys.country;
     //let cityName = response.data.name;
-    let WeatherState = response.data.weather.main;
+    let WeatherStateMain = response.data.weather.main;
     let WeatherStateDescription = response.data.weather[0].description;
     let temp = Math.round(response.data.main.temp);
     let temp_max = Math.round(response.data.main.temp_max);
@@ -100,17 +100,17 @@ function readAPIAndSetElements(response) {
     let feels_like = Math.round(response.data.main.feels_like);
     let humidity = response.data.main.humidity;
     let windSpeed = Math.round(response.data.wind.speed);
-    let finalWeatherState = "";
+    let finalWeatherStateDescription = "";
     if (typeof WeatherStateDescription === "undefined") {
-        finalWeatherState = WeatherState;
+        finalWeatherStateDescription = WeatherStateMain;
     } else {
-        finalWeatherState = WeatherStateDescription;
+        finalWeatherStateDescription = WeatherStateDescription;
     }
     document.querySelector("#current-tempreture").innerHTML = temp;
     document.querySelector("#current-max").innerHTML = temp_max;
     document.querySelector("#current-min").innerHTML = temp_min;
-    document.querySelector("#current-weather-state").innerHTML =
-        finalWeatherState;
+    document.querySelector("#current-weather-description").innerHTML =
+        finalWeatherStateDescription;
     document.querySelector("#current-feels-like-value").innerHTML = feels_like;
     document.querySelector("#current-humidity-value").innerHTML = humidity;
     document.querySelector("#current-wind-value").innerHTML = windSpeed;
@@ -263,6 +263,7 @@ function showDegreeInCelsius(event) {
 
 function showDegreeInFahrenheit(event) {
     event.preventDefault();
+
     let currentTempretureSymbol = document.querySelector(
         "#current-tempreture-symbol"
     );

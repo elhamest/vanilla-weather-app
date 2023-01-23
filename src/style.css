@@ -152,13 +152,17 @@ body {
     margin-right: 50px;
 }
 
-.current-weather-text {
+.current-weather-content {
     padding-left: 30px;
     margin-left: 30px;
 }
 
-.current-weather-state {
-    font-size: 25px;
+.current-weather-description {
+    font-size: 23px;
+}
+
+.current-weather-description::first-letter {
+    text-transform: capitalize;
 }
 
 .current-feels-like,
