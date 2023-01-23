@@ -197,16 +197,16 @@ function handleCurrentLocationButtonImage(event) {
 }
 
 //==========::::: convert unit degree :::::==========
-function setDegreeLinkSelectedStyle(linkName) {
+function setStyleOfSelectedDegreeLink(activeLinkName) {
     let fahrenheitDegreeLink = document.querySelector("#fahrenheit-degree-link");
     let celsiusDegreeLink = document.querySelector("#celsius-degree-link");
 
-    if (linkName === "f") {
-        fahrenheitDegreeLink.style.color = "#88d7f7";
-        celsiusDegreeLink.style.color = "#3539ab";
+    if (activeLinkName === "f") {
+        fahrenheitDegreeLink.classList.add("active-degree-link");
+        celsiusDegreeLink.classList.remove("active-degree-link");
     } else {
-        fahrenheitDegreeLink.style.color = "#3539ab";
-        celsiusDegreeLink.style.color = "#88d7f7";
+        fahrenheitDegreeLink.classList.remove("active-degree-link");
+        celsiusDegreeLink.classList.add("active-degree-link");
     }
 }
 
@@ -257,7 +257,7 @@ function showDegreeInCelsius(event) {
     if (currentTempretureSymbol.textContent === "℉") {
         setUnitDegree("c");
         setValueDegree("c");
-        setDegreeLinkSelectedStyle("c");
+        setStyleOfSelectedDegreeLink("c");
     }
 }
 
@@ -270,7 +270,7 @@ function showDegreeInFahrenheit(event) {
     if (currentTempretureSymbol.textContent === "℃") {
         setUnitDegree("f");
         setValueDegree("f");
-        setDegreeLinkSelectedStyle("f");
+        setStyleOfSelectedDegreeLink("f");
     }
 }
 

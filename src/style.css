@@ -128,11 +128,12 @@ body {
 
 .degree-link {
     text-decoration: none;
+    color: #3539ab;
 }
 
-.degree-link:visited,
-.degree-link:link {
-    color: #3539ab;
+.active-degree-link {
+    color: #88d7f7;
+    cursor: default;
 }
 
 
