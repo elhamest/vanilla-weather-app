@@ -20,12 +20,12 @@ body {
 /*====== container ======*/
 
 .container {
-    max-width: 650px;
+    max-width: 660px;
     min-width: 400px;
     margin: 150px auto 0;
     border: 1px solid rgb(233, 233, 233, 0.6);
     border-radius: 8px;
-    padding: 30px 40px 20px;
+    padding: 30px 30px 20px;
 }
 
 
@@ -67,19 +67,22 @@ body {
     color: #fff;
     font-size: 45px;
     font-weight: 500;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: auto;
+    line-height: 1;
 }
 
 .last-updated-time {
     color: #1771cc;
     font-size: 12px;
     font-weight: 500;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 30px;
 }
 
 .last-updated-date {
     color: #1771cc;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 30px;
 }
 
 .last-updated-day {
@@ -93,7 +96,7 @@ body {
 }
 
 .current-min-max-table {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 30px;
 }
 
 .current-tempreture {
@@ -152,13 +155,11 @@ body {
     align-items: center;
     margin: auto;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.823);
 }
 
-.current-weather-image {
-    content: url("../img/wt4-icon32.png");
+.current-weather-image img {
     max-width: 200px;
-    margin-right: 50px;
+    margin-right: 20px;
 }
 
 .current-weather-content {
@@ -168,6 +169,7 @@ body {
 
 .current-weather-description {
     font-size: 23px;
+    color: #1771cc;
 }
 
 .current-weather-description::first-letter {
@@ -177,7 +179,8 @@ body {
 .current-feels-like,
 .current-humidity,
 .current-wind {
-    font-size: 15px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.823);
 }
 
 

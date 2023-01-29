@@ -85,18 +85,103 @@ function addEscapeToEventListener(event) {
 }
 
 /*==========::::: call API weather ::::::==========*/
-
-function readAPIAndSetElements(response) {
-    //let country = response.data.sys.country;
-    //let cityName = response.data.name;
-    let WeatherStateDescription = response.data.weather[0].description;
-    let finalWeatherStateDescription = "";
-    if (typeof WeatherStateDescription === "undefined") {
-        finalWeatherStateDescription = response.data.weather.main;
-    } else {
-        finalWeatherStateDescription = WeatherStateDescription;
+function setCurrentIcon(weatherId, weatherIcon, finalDescription) {
+    let Url1 = "img/weather/";
+    let imgSource = "";
+    //--------- thunderstorm
+    if (
+        [200, 201, 202, 210, 211, 212, 221, 230, 231, 232].includes(weatherId) &&
+        weatherIcon === "11d"
+    ) {
+        imgSource = `${Url1}thunderstorm/1.png`;
+    }
+    //---------- drizzle
+    if (
+        [300, 301, 302, 310, 311, 312, 313, 314, 321].includes(weatherId) &&
+        weatherIcon === "09d"
+    ) {
+        imgSource = `${Url1}drizzle/1.png`;
+    }
+    //---------- atmosphere
+    if (
+        [701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(weatherId) &&
+        weatherIcon === "50d"
+    ) {
+        imgSource = `${Url1}atmosphere/1.png`;
+    }
+    //---------- rain
+    if ([500, 501, 502, 503, 504].includes(weatherId) && weatherIcon === "10d") {
+        imgSource = `${Url1}rain/1.png`;
+    }
+    if (weatherId === 511 && weatherIcon === "13d") {
+        imgSource = `${Url1}rain/f1.png`;
     }
 
+    if ([520, 521, 522, 531].includes(weatherId) && weatherIcon === "09d") {
+        imgSource = `${Url1}rain/n1.png`;
+    }
+    //---------- snow
+    if (
+        [600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(
+            weatherId
+        ) &&
+        weatherIcon === "13d"
+    ) {
+        imgSource = `${Url1}snow/1.png`;
+    }
+    //---------- clouds
+    if (weatherId === 801) {
+        if (weatherIcon === "02d") {
+            imgSource = `${Url1}fewClouds/1.png`;
+        }
+        if (weatherIcon === "02n") {
+            imgSource = `${Url1}fewClouds/n1.png`;
+        }
+    }
+
+    if (weatherId === 802 && ["03d", "03n"].includes(weatherIcon)) {
+        imgSource = `${Url1}scatteredClouds/1.png`;
+    }
+
+    if (weatherId === 803 && ["04d", "04n"].includes(weatherIcon)) {
+        imgSource = `${Url1}brokenClouds/1.png`;
+    }
+    if (weatherId === 804 && ["04d", "04n"].includes(weatherIcon)) {
+        imgSource = `${Url1}overcastClouds/1.png`;
+    }
+    //---------- clear sky
+    if (weatherId === 800) {
+        if (weatherIcon === "01d") {
+            imgSource = `${Url1}clearSky/1.png`;
+        }
+        if (weatherIcon === "01n") {
+            imgSource = `${Url1}clearSky/n1.png`;
+        }
+    }
+    let currentWeatherImage = document.querySelector("#current-weather-image");
+    if (imgSource !== "") {
+        currentWeatherImage.setAttribute("src", imgSource);
+    }
+    currentWeatherImage.setAttribute("alt", finalDescription);
+}
+//
+
+function readAPIAndSetElements(response) {
+    console.log(response.data);
+    let weatherDescription = response.data.weather[0].description;
+    let mainDescription = response.data.weather[0].main;
+    let finalDescription = "";
+    if (typeof weatherDescription === "undefined") {
+        finalDescription = mainDescription;
+    } else {
+        finalDescription = weatherDescription;
+    }
+    let weatherId = response.data.weather[0].id;
+    let weatherIcon = response.data.weather[0].icon;
+    document.querySelector("#current-weather-description").innerHTML =
+        finalDescription;
+    setCurrentIcon(weatherId, weatherIcon, finalDescription);
+    //
     document.querySelector("#current-tempreture").innerHTML = Math.round(
         response.data.main.temp
     );
@@ -106,8 +191,6 @@ function readAPIAndSetElements(response) {
     document.querySelector("#current-min").innerHTML = Math.round(
         response.data.main.temp_min
     );
-    document.querySelector("#current-weather-description").innerHTML =
-        finalWeatherStateDescription;
     document.querySelector("#current-feels-like-value").innerHTML = Math.round(
         response.data.main.feels_like
     );
@@ -153,16 +236,37 @@ function callWeatherApiByCityname(cityName) {
         .get(apiUrl)
         .then(handleCurrentWeatherApiByCityName)
         .catch((t) => {
-            if (t.response !== undefined && t.response.data !== undefined) {
-                alert(t.response.data.message);
-            } else if (t.message != null) {
-                alert(t.message);
+            if (t.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(t.response.data);
+                console.log(t.response.status);
+                console.log(t.response.headers);
+            } else if (t.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(t.request);
             } else {
-                alert("something went wrong!");
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", t.message);
             }
+            console.log(t.config);
             document.querySelector("#search-input").value = ""; //reset()
         });
 }
+/*
+    .catch((t) => {
+        if (t.response !== undefined && t.response.data !== undefined) {
+            console.log(t.response.data.message);
+        } else if (t.message != null) {
+            alert(t.message);
+        } else {
+            alert("something went wrong!");
+        }
+        document.querySelector("#search-input").value = ""; //reset()
+    })*/
+
 //
 function callWeatherApiByLocation(lat, lon) {
     let apiKey = "5071090a29decc6994e4296133521189";
@@ -289,7 +393,7 @@ function showDegreeInFahrenheit(event) {
 //==========::::: load Page :::::==========
 
 /*----- search form ------*/
-function onLoad() {
+function start() {
     let showSearchformElement = document.querySelector(
         "#showing-search-form-button"
     );
@@ -320,4 +424,7 @@ function onLoad() {
     callWeatherApiByCityname("London");
 }
 
-window.onload = onLoad();
+// window.onLoad = start;
+window.onload = function() {
+    start();
+}; // can also use window.addEventListener('load', (event) => { start(); });
