@@ -45,6 +45,155 @@ function GetDateTime(timeStamp) {
     return objDateTime;
 }
 
+//ُ==========::::: set icon :::::==========
+
+function setIcon(weatherId, weatherIcon, finalDescription, isIcon, cardIndex) {
+    let Url1 = "img/weather/";
+    let imgSource = "";
+
+    if (
+        [200, 201, 202, 210, 211, 212, 221, 230, 231, 232].includes(weatherId) &&
+        weatherIcon === "11d"
+    ) {
+        if (isIcon) {
+            imgSource = `${Url1}thunderstorm/icon.svg`;
+        } else {
+            imgSource = `${Url1}thunderstorm/1.png`;
+        }
+    }
+
+    if (
+        [300, 301, 302, 310, 311, 312, 313, 314, 321].includes(weatherId) &&
+        weatherIcon === "09d"
+    ) {
+        if (isIcon) {
+            imgSource = `${Url1}drizzle/icon.svg`;
+        } else {
+            imgSource = `${Url1}drizzle/1.png`;
+        }
+    }
+
+    if (
+        [701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(weatherId) &&
+        weatherIcon === "50d"
+    ) {
+        if (isIcon) {
+            imgSource = `${Url1}atmosphere/icon.svg`;
+        } else {
+            imgSource = `${Url1}atmosphere/1.png`;
+        }
+    }
+
+    if ([500, 501, 502, 503, 504].includes(weatherId) && weatherIcon === "10d") {
+        if (isIcon) {
+            imgSource = `${Url1}rain/icon.svg`;
+        } else {
+            imgSource = `${Url1}rain/1.png`;
+        }
+    }
+    if (weatherId === 511 && weatherIcon === "13d") {
+        if (isIcon) {
+            imgSource = `${Url1}rain/fIcon.svg`;
+        } else {
+            imgSource = `${Url1}rain/f1.png`;
+        }
+    }
+    if ([520, 521, 522, 531].includes(weatherId) && weatherIcon === "09d") {
+        if (isIcon) {
+            imgSource = `${Url1}rain/nIcon.svg`;
+        } else {
+            imgSource = `${Url1}rain/n1.png`;
+        }
+    }
+
+    if (
+        [600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(
+            weatherId
+        ) &&
+        weatherIcon === "13d"
+    ) {
+        if (isIcon) {
+            imgSource = `${Url1}snow/icon.svg`;
+        } else {
+            imgSource = `${Url1}snow/1.png`;
+        }
+    }
+
+    if (weatherId === 801) {
+        if (weatherIcon === "02d") {
+            if (isIcon) {
+                imgSource = `${Url1}fewClouds/icon.svg`;
+            } else {
+                imgSource = `${Url1}fewClouds/1.png`;
+            }
+        }
+        if (weatherIcon === "02n") {
+            if (isIcon) {
+                imgSource = `${Url1}fewClouds/nIcon.svg`;
+            } else {
+                imgSource = `${Url1}fewClouds/n1.png`;
+            }
+        }
+    }
+
+    if (weatherId === 802 && ["03d", "03n"].includes(weatherIcon)) {
+        if (isIcon) {
+            imgSource = `${Url1}scatteredClouds/icon.svg`;
+        } else {
+            imgSource = `${Url1}scatteredClouds/1.png`;
+        }
+    }
+
+    if (weatherId === 803 && ["04d", "04n"].includes(weatherIcon)) {
+        if (isIcon) {
+            imgSource = `${Url1}brokenClouds/icon.svg`;
+        } else {
+            imgSource = `${Url1}brokenClouds/1.png`;
+        }
+    }
+
+    if (weatherId === 804 && ["04d", "04n"].includes(weatherIcon)) {
+        if (isIcon) {
+            imgSource = `${Url1}overcastClouds/icon.svg`;
+        } else {
+            imgSource = `${Url1}overcastClouds/1.png`;
+        }
+    }
+
+    if (weatherId === 800) {
+        if (weatherIcon === "01d") {
+            if (isIcon) {
+                imgSource = `${Url1}clearSky/icon.svg`;
+            } else {
+                imgSource = `${Url1}clearSky/1.png`;
+            }
+        }
+        if (weatherIcon === "01n") {
+            if (isIcon) {
+                imgSource = `${Url1}clearSky/nIcon.svg`;
+            } else {
+                imgSource = `${Url1}clearSky/n1.png`;
+            }
+        }
+    }
+    if (isIcon) {
+        let cardImageId = `#card-image${cardIndex}`;
+        let cardImageElement = document.querySelector(cardImageId);
+        if (imgSource !== "") {
+            cardImageElement.setAttribute("src", imgSource);
+        }
+        cardImageElement.setAttribute("alt", finalDescription);
+    } else {
+        let currentWeatherImageElement = document.querySelector(
+            "#current-weather-image"
+        );
+        if (imgSource !== "") {
+            currentWeatherImageElement.setAttribute("src", imgSource);
+        }
+        currentWeatherImageElement.setAttribute("alt", finalDescription);
+    }
+}
+
 //ُ==========::::: search form :::::==========
 
 function setDisplayOfSearchForm(displayValue) {
@@ -84,90 +233,83 @@ function addEscapeToEventListener(event) {
     }
 }
 
-/*==========::::: call API weather ::::::==========*/
-function setCurrentIcon(weatherId, weatherIcon, finalDescription) {
-    let Url1 = "img/weather/";
-    let imgSource = "";
-    //--------- thunderstorm
-    if (
-        [200, 201, 202, 210, 211, 212, 221, 230, 231, 232].includes(weatherId) &&
-        weatherIcon === "11d"
-    ) {
-        imgSource = `${Url1}thunderstorm/1.png`;
-    }
-    //---------- drizzle
-    if (
-        [300, 301, 302, 310, 311, 312, 313, 314, 321].includes(weatherId) &&
-        weatherIcon === "09d"
-    ) {
-        imgSource = `${Url1}drizzle/1.png`;
-    }
-    //---------- atmosphere
-    if (
-        [701, 711, 721, 731, 741, 751, 761, 762, 771, 781].includes(weatherId) &&
-        weatherIcon === "50d"
-    ) {
-        imgSource = `${Url1}atmosphere/1.png`;
-    }
-    //---------- rain
-    if ([500, 501, 502, 503, 504].includes(weatherId) && weatherIcon === "10d") {
-        imgSource = `${Url1}rain/1.png`;
-    }
-    if (weatherId === 511 && weatherIcon === "13d") {
-        imgSource = `${Url1}rain/f1.png`;
-    }
-
-    if ([520, 521, 522, 531].includes(weatherId) && weatherIcon === "09d") {
-        imgSource = `${Url1}rain/n1.png`;
-    }
-    //---------- snow
-    if (
-        [600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622].includes(
-            weatherId
-        ) &&
-        weatherIcon === "13d"
-    ) {
-        imgSource = `${Url1}snow/1.png`;
-    }
-    //---------- clouds
-    if (weatherId === 801) {
-        if (weatherIcon === "02d") {
-            imgSource = `${Url1}fewClouds/1.png`;
-        }
-        if (weatherIcon === "02n") {
-            imgSource = `${Url1}fewClouds/n1.png`;
-        }
-    }
-
-    if (weatherId === 802 && ["03d", "03n"].includes(weatherIcon)) {
-        imgSource = `${Url1}scatteredClouds/1.png`;
-    }
-
-    if (weatherId === 803 && ["04d", "04n"].includes(weatherIcon)) {
-        imgSource = `${Url1}brokenClouds/1.png`;
-    }
-    if (weatherId === 804 && ["04d", "04n"].includes(weatherIcon)) {
-        imgSource = `${Url1}overcastClouds/1.png`;
-    }
-    //---------- clear sky
-    if (weatherId === 800) {
-        if (weatherIcon === "01d") {
-            imgSource = `${Url1}clearSky/1.png`;
-        }
-        if (weatherIcon === "01n") {
-            imgSource = `${Url1}clearSky/n1.png`;
-        }
-    }
-    let currentWeatherImage = document.querySelector("#current-weather-image");
-    if (imgSource !== "") {
-        currentWeatherImage.setAttribute("src", imgSource);
-    }
-    currentWeatherImage.setAttribute("alt", finalDescription);
+//==========::::: display forecast :::::==========
+function formatForecastDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let arrDay = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return arrDay[date.getDay()];
 }
-//
 
-function readAPIAndSetElements(response) {
-    console.log(response.data);
+function handleForecastApi(response) {
+    let forecast = response.data.daily;
+    let cardSectionElement = document.querySelector("#card-section");
+    cardSectionElement.innerHTML = "";
+    forecast.forEach(function(forecastDay, index) {
+        if (index < 5) {
+            let weatherId = forecastDay.weather[0].id;
+            let weatherIcon = forecastDay.weather[0].icon;
+            let weatherDescription = forecastDay.weather[0].description;
+            let mainDescription = forecastDay.weather[0].main;
+            let finalDescription = "";
+            if (typeof mainDescription === "undefined") {
+                finalDescription = weatherDescription;
+            } else {
+                finalDescription = mainDescription;
+            }
+            let cardImageId = `card-image${index}`;
+            cardSectionElement.innerHTML += `
+            <div class="card">
+   <div class="card-title">${formatForecastDay(forecastDay.dt)}</div>
+   <img class="card-image" id="${cardImageId}"/>
+   <div class="card-description">${finalDescription}</div>
+   <div class="card-tempreture">
+   <span class="card-max-tempreture degree-value-to-change">${Math.round(
+     forecastDay.temp.max
+   )}</span>
+   <span class="card-slash"> / </span>
+   <span class="card-min-tempreture degree-value-to-change">${Math.round(
+     forecastDay.temp.min
+   )}</span>
+   <span class="degree-style unit-degree-to-change">&#8451;</span>
+   </div>
+ </div>`;
+
+            setIcon(weatherId, weatherIcon, finalDescription, true, index);
+        }
+    });
+    console.log(cardSectionElement.innerHTML);
+}
+
+function displayForecast(latitude, longitude) {
+    let apiKey = "b35c686ba9565ba0ab254c2230937552";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude={minutely,hourly}&appid=${apiKey}&units=metric`;
+    axios
+        .get(apiUrl)
+        .then(handleForecastApi)
+        .catch((t) => {
+            if (t.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(t.response.data);
+                console.log(t.response.status);
+                console.log(t.response.headers);
+            } else if (t.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(t.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", t.message);
+            }
+            console.log(t.config);
+            document.querySelector("#search-input").value = ""; //reset()
+        });
+}
+
+/*==========::::: call API weather ::::::==========*/
+
+function readValuesOfWeatherApi(response) {
     let weatherDescription = response.data.weather[0].description;
     let mainDescription = response.data.weather[0].main;
     let finalDescription = "";
@@ -180,7 +322,7 @@ function readAPIAndSetElements(response) {
     let weatherIcon = response.data.weather[0].icon;
     document.querySelector("#current-weather-description").innerHTML =
         finalDescription;
-    setCurrentIcon(weatherId, weatherIcon, finalDescription);
+    setIcon(weatherId, weatherIcon, finalDescription, false);
     //
     document.querySelector("#current-tempreture").innerHTML = Math.round(
         response.data.main.temp
@@ -207,25 +349,27 @@ function readAPIAndSetElements(response) {
         objDateTime.time;
     document.querySelector("#last-updated-day").innerHTML = objDateTime.day;
     document.querySelector("#last-updated-month").innerHTML = objDateTime.month;
+    //
+    displayForecast(response.data.coord.lat, response.data.coord.lon);
 }
 //
-function handleCurrentWeatherApiByCityName(response) {
+function handleWeatherApiByCityName(response) {
     let cityName = response.data.name;
     if (cityName === undefined || cityName === "") {
         alert("city not found!");
     } else {
         showCityInHeadingByCityName(cityName);
-        readAPIAndSetElements(response);
+        readValuesOfWeatherApi(response);
     }
 }
 //
-function handleCurrentWeatherApiByLocation(response) {
+function handleWeatherApiByLocation(response) {
     let cityName = response.data.name;
     if (cityName === undefined || cityName === "") {
         alert("city not found!");
     } else {
         showCityInHeadingByLocation(cityName);
-        readAPIAndSetElements(response);
+        readValuesOfWeatherApi(response);
     }
 }
 //
@@ -234,7 +378,7 @@ function callWeatherApiByCityname(cityName) {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
     axios
         .get(apiUrl)
-        .then(handleCurrentWeatherApiByCityName)
+        .then(handleWeatherApiByCityName)
         .catch((t) => {
             if (t.response) {
                 // The request was made and the server responded with a status code
@@ -255,17 +399,6 @@ function callWeatherApiByCityname(cityName) {
             document.querySelector("#search-input").value = ""; //reset()
         });
 }
-/*
-    .catch((t) => {
-        if (t.response !== undefined && t.response.data !== undefined) {
-            console.log(t.response.data.message);
-        } else if (t.message != null) {
-            alert(t.message);
-        } else {
-            alert("something went wrong!");
-        }
-        document.querySelector("#search-input").value = ""; //reset()
-    })*/
 
 //
 function callWeatherApiByLocation(lat, lon) {
@@ -274,14 +407,28 @@ function callWeatherApiByLocation(lat, lon) {
 `;
     axios
         .get(apiUrl)
-        .then(handleCurrentWeatherApiByLocation)
+        .then(handleWeatherApiByLocation)
         .catch((t) => {
-            alert(t.response.data.message);
+            if (t.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(t.response.data);
+                console.log(t.response.status);
+                console.log(t.response.headers);
+            } else if (t.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(t.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", t.message);
+            }
+            console.log(t.config);
             document.querySelector("#search-input").value = ""; //reset()
         });
 }
 //
-
 function handleSearchInputElement(event) {
     if (event.key === "Enter") {
         event.preventDefault();
@@ -392,7 +539,7 @@ function showDegreeInFahrenheit(event) {
 
 //==========::::: load Page :::::==========
 
-/*----- search form ------*/
+//-_-_-_ search form
 function start() {
     let showSearchformElement = document.querySelector(
         "#showing-search-form-button"
@@ -404,7 +551,7 @@ function start() {
 
     document.addEventListener("keyup", addEscapeToEventListener);
 
-    /*----- current location button ----- */
+    //-_-_-_ current location button
     let currentLocationButtonImageElement = document.querySelector(
         "#current-location-button-image"
     );
@@ -413,14 +560,14 @@ function start() {
         handleCurrentLocationButtonImage
     );
 
-    /*----- change degree -----*/
+    //-_-_-_ change degree
     let celsiusDegreeLink = document.querySelector("#celsius-degree-link");
     celsiusDegreeLink.addEventListener("click", showDegreeInCelsius);
 
     let fahrenheitDegreeLink = document.querySelector("#fahrenheit-degree-link");
     fahrenheitDegreeLink.addEventListener("click", showDegreeInFahrenheit);
 
-    /*----------*/
+    //-_-_-_
     callWeatherApiByCityname("London");
 }
 

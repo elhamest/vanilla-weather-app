@@ -65,7 +65,7 @@ body {
 
 .city-heading-name {
     color: #fff;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 0;
@@ -77,7 +77,7 @@ body {
     color: #1771cc;
     font-size: 12px;
     font-weight: 500;
-    margin: 0 0 0 30px;
+    margin: 2px 0 0 30px;
 }
 
 .last-updated-date {
@@ -169,8 +169,11 @@ body {
 
 .current-weather-description {
     font-size: 23px;
-    color: #1771cc;
+    color: #88d7f7;
 }
+
+
+/*1771cc*/
 
 .current-weather-description::first-letter {
     text-transform: capitalize;
@@ -184,7 +187,7 @@ body {
 }
 
 
-/*======== card-section ========*/
+/*======== weather forecast ========*/
 
 .card-section {
     display: flex;
@@ -195,35 +198,58 @@ body {
 }
 
 .card {
-    border: 1px solid rgb(233, 233, 233, 0.5);
+    border: 1px solid rgb(233, 233, 233, 0.3);
     border-radius: 8px;
     text-align: center;
     padding: 5px;
     flex-basis: auto;
     width: 100px;
-}
-
-.card-test {
-    border: 2px solid rgb(131, 124, 130, 0.5);
+    position: relative;
 }
 
 .card-title {
     font-size: 15px;
     font-weight: 500;
-    color: #fff;
+    color: #1771cc;
 }
 
-.daily-min-tempreture,
-.daily-max-tempreture,
-.slash {
+.card-image {
+    max-width: 40px;
+}
+
+.card-description {
+    font-size: 13px;
+    font-weight: 500px;
+    color: #1771cc;
+    margin: 0;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.card-tempreture {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.card-min-tempreture,
+.card-max-tempreture,
+.card-slash {
     color: #555;
     font-size: 13px;
 }
 
-.daily-weather-state {
-    font-size: 13px;
-    font-weight: 500px;
-    color: #fff;
+.card-min-tempreture {
+    opacity: 0.8;
+}
+
+
+/*specif the current day card*/
+
+.card-test {
+    border: 2px solid rgb(131, 124, 130, 0.5);
 }
 
 
