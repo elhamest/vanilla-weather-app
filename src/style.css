@@ -2,11 +2,8 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-
-/*====== cover ======*/
-
 .cover {
-    background: url("../img/b.jpg");
+    background: linear-gradient(#3884ce, #b6d7e2);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -169,7 +166,7 @@ body {
 
 .current-weather-description {
     font-size: 23px;
-    color: #88d7f7;
+    color: #e1f0ff;
 }
 
 
@@ -214,7 +211,7 @@ body {
 }
 
 .card-image {
-    max-width: 40px;
+    max-width: 50px;
 }
 
 .card-description {

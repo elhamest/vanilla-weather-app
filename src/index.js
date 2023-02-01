@@ -56,7 +56,7 @@ function setIcon(weatherId, weatherIcon, finalDescription, isIcon, cardIndex) {
         weatherIcon === "11d"
     ) {
         if (isIcon) {
-            imgSource = `${Url1}thunderstorm/icon.svg`;
+            imgSource = `${Url1}thunderstorm/icon2.svg`;
         } else {
             imgSource = `${Url1}thunderstorm/1.png`;
         }
