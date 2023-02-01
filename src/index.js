@@ -277,7 +277,6 @@ function handleForecastApi(response) {
             setIcon(weatherId, weatherIcon, finalDescription, true, index);
         }
     });
-    console.log(cardSectionElement.innerHTML);
 }
 
 function displayForecast(latitude, longitude) {
