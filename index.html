@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,49 +9,74 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/style.css" />
-    <script async src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script
+      async
+      src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"
+    ></script>
     <!--<script async src="src/axios.min.js"></script>-->
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="cover">
-        <div class="container">
-            <!---- top section ----->
-            <div class="top-section">
-                <div class="col1">
-                    <!--state1-->
-                    <div class="city-heading">
-                        <button class="showing-search-form-button" id="showing-search-form-button"></button>
-                        <h1 class="city-heading-name" id="city-heading-name"></h1>
-                    </div>
-                    <!--state2-->
-                    <form class="search-form">
-                        <input type="search" placeholder="Search..." class="search-input" id="search-input" autocomplete="off" />
-                        <button type="submit" class="current-location-button" id="current-location-button">
+      <div class="container">
+        <!---- top section ----->
+        <div class="top-section">
+          <div class="col1">
+            <!--state1-->
+            <div class="city-heading">
+              <button
+                class="showing-search-form-button"
+                id="showing-search-form-button"
+              ></button>
+              <h1 class="city-heading-name" id="city-heading-name"></h1>
+            </div>
+            <!--state2-->
+            <form class="search-form">
+              <input
+                type="search"
+                placeholder="Search..."
+                class="search-input"
+                id="search-input"
+                autocomplete="off"
+              />
+              <button
+                type="submit"
+                class="current-location-button"
+                id="current-location-button"
+              >
                 <img
                   class="current-location-button-image"
                   id="current-location-button-image"
                 />
               </button>
-                    </form>
+            </form>
 
-                    <h3 class="last-updated-time">
-                        Last updated: <span id="last-updated-time-value"></span>
-                    </h3>
-                    <h2 class="last-updated-date">
-                        <span class="last-updated-day" id="last-updated-day"></span
+            <h3 class="last-updated-time">
+              Last updated: <span id="last-updated-time-value"></span>
+            </h3>
+            <h2 class="last-updated-date">
+              <span class="last-updated-day" id="last-updated-day"></span
               ><span class="last-updated-month" id="last-updated-month"></span>
-                    </h2>
-                    <div class="current-min-max-table">
-                        <table>
-                            <tr>
-                                <td rowspan="2">
-                                    <span class="current-tempreture degree-value-to-change" id="current-tempreture"></span>
-                                </td>
-                                <td>
-                                    <span class="current-tempreture-symbol unit-degree-to-change" id="current-tempreture-symbol">&#8451;</span
+            </h2>
+            <div class="current-min-max-table">
+              <table>
+                <tr>
+                  <td rowspan="2">
+                    <span
+                      class="current-tempreture degree-value-to-change"
+                      id="current-tempreture"
+                    ></span>
+                  </td>
+                  <td>
+                    <span
+                      class="current-tempreture-symbol unit-degree-to-change"
+                      id="current-tempreture-symbol"
+                      >&#8451;</span
                     >
                   </td>
                   <td
@@ -104,28 +128,30 @@
                   class="degree-value-to-change"
                   id="current-feels-like-value"
                 ></span>
-                                    <span class="unit-degree-to-change" id="current-feels-like-unit">&#8451;</span
+                <span class="unit-degree-to-change" id="current-feels-like-unit"
+                  >&#8451;</span
                 >
               </div>
               <div class="current-humidity">
                 Humidity: <span id="current-humidity-value"></span> %
-                    </div>
-                    <div class="current-wind">
-                        Wind <span id="current-wind-value"></span> km/h
-                    </div>
-                </div>
+              </div>
+              <div class="current-wind">
+                Wind <span id="current-wind-value"></span> km/h
+              </div>
             </div>
+          </div>
         </div>
 
         <!------ weather forecast ------->
         <div class="card-section" id="card-section"></div>
         <footer>
-            <p>
-                <a href="https://github.com/elhamest/weather-app" target="_blank">Open-source code</a
+          <p>
+            <a href="https://github.com/elhamest/weather-app" target="_blank"
+              >Open-source code</a
             >
             by
             <a
-              href="https://www.linkedin.com/in/elham-estedlali-850a606b/"
+              href="https://www.linkedin.com/in/elham-estedlali/"
               target="_blank"
             >
               Elham Estedlali</a
